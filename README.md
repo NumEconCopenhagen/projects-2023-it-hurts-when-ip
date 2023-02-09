@@ -1,7 +1,7 @@
 # \[Group name\]
 
 **Group members:**
-- A
+- Maurício Loureiro de Souza
 - B
 - C
 
