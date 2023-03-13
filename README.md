@@ -1,9 +1,9 @@
-# \[Group name\]
+# \[It hurts when IP\]
 
 **Group members:**
 - Maurício Loureiro de Souza
-- B
-- C
+- Rhitam Das
+- Alastair Barron
 
 This repository contains  
 1. Inaugural project. 
