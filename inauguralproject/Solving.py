@@ -111,8 +111,8 @@ class HouseholdSpecializationModelClass:
         fig = plt.figure()
         ax = fig.add_subplot(projection = '3d')
 
-        for i, alpha in enumerate(alpha_list):
-            for j, sigma in enumerate(sigma_list):
+        for i, alpha in alpha_list:
+            for j, sigma in sigma_list:
 
                  #calculate utility
                 u = self.calc_utility(LM,HM,LF,HF)
