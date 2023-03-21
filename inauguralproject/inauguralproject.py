@@ -135,7 +135,7 @@ class HouseholdSpecializationModelClass:
                 print(f'{k} = {v:6.4f}')   
 
         return opt 
-        pass    
+    
 
     def solve_wF_vec(self,discrete=False):
         """ solve model for vector of female wages """
@@ -160,7 +160,7 @@ class HouseholdSpecializationModelClass:
         par = self.par
         sol = self.sol
 
-        x = np.log(par.wF_vec)
+        x = np.log(par.wF_vec/par.wM)
         y = np.log(sol.HF_vec/sol.HM_vec)
         A = np.vstack([np.ones(x.size),x]).T
         sol.beta0,sol.beta1 = np.linalg.lstsq(A,y,rcond=None)[0]
