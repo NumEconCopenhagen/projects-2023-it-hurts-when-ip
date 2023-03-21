@@ -108,12 +108,11 @@ class HouseholdSpecializationModelClass:
         alpha_list = [0.25, 0.50, 0.75]
         sigma_list = [0.5, 1.0, 1.5]
 
-        fig, axs = plt.subplots(nrows=3, ncols=3, figsize=(10, 10))
+        fig = plt.figure()
+        ax = fig.add_subplot(projection = '3d')
 
-        for i, alpha in enumerate(alpha_list):
-            for j, sigma in enumerate(sigma_list):
-                par.alpha = alpha
-                par.sigma = sigma
+        for i, alpha in alpha_list:
+            for j, sigma in sigma_list:
 
                  #calculate utility
                 u = self.calc_utility(LM,HM,LF,HF)
@@ -130,16 +129,22 @@ class HouseholdSpecializationModelClass:
                 opt.HF = HF[k]
 
                  #store the results
-                sol.LM_vec[j+i*3] = opt.LM
-                sol.HM_vec[j+i*3] = opt.HM
-                sol.LF_vec[j+i*3] = opt.LF
-                sol.HF_vec[j+i*3] = opt.HF
+                #sol.LM_vec[i, j] = opt.LM
+                #sol.HM_vec[i, j] = opt.HM
+                #sol.LF_vec[i, j] = opt.LF
+                #sol.HF_vec[i, j] = opt.HF
 
                 # plot the results
-                axs[i, j].contourf(x, x, np.reshape(HF/HM, (49,49)), cmap=plt.cm.coolwarm)
-                axs[i, j].set_xlabel('HF')
-                axs[i, j].set_ylabel('HM')
-                axs[i, j].set_title(r'$\alpha = {}, \sigma = {}$'.format(alpha, sigma))
+                
+                #axs[i, j].contourf(x, x, np.reshape(HF/HM, (49,49)), cmap=plt.cm.coolwarm)
+                #axs[i, j].xlabel('HF')
+                #axs[i, j].ylabel('HM')
+                HF_HM_reshaped = np.reshape(HF/HM, (49, 49, 49, 49))
+                HF_HM_reshaped = np.mean(HF_HM_reshaped, axis=(1,3))
+                ax.contourf(x, x, np.log(HF_HM_reshaped), cmap=plt.cm.coolwarm)
+                ax.set(xlabel='HF', ylabel='HM', zlabel='alpha')
+    
+    
 
         plt.tight_layout()
         plt.show()
