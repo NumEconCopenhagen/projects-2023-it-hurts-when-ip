@@ -111,7 +111,30 @@ class HouseholdSpecializationModelClass:
 
     def solve(self,do_print=False):
         """ solve model continously """
+        opt = SimpleNamespace()
+        par = self.par
+        sol = self.sol
 
+        #x is LM, HM, LF, HF
+        def obj(x):
+            return -self.calc_utility(*x)
+
+        bounds = optimize.Bounds([0,0,0,0], [24,24,24,24])
+        constraints = optimize.LinearConstraint([[1,1,0,0], [0,0,1,1]], [0,0], [24,24])
+
+        res = optimize.minimize(obj, (8,8,8,8), method='trust-constr', bounds=bounds, constraints=constraints)
+ 
+        opt.LM = res.x[0]
+        opt.HM = res.x[1]
+        opt.LF = res.x[2]
+        opt.HF = res.x[3]
+
+        # e. print
+        if do_print:
+            for k,v in opt.__dict__.items():
+                print(f'{k} = {v:6.4f}')   
+
+        return opt 
         pass    
 
     def solve_wF_vec(self,discrete=False):
