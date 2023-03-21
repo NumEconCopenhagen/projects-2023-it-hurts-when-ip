@@ -54,7 +54,12 @@ class HouseholdSpecializationModelClass:
         C = par.wM*LM + par.wF*LF
 
         # b. home production
-        H = HM**(1-par.alpha)*HF**par.alpha
+        if par.sigma == 1.0:
+            H = HM**(1-par.alpha)*HF**par.alpha
+        elif par.sigma == 0:
+            min(HM, HF)
+        else:
+            ((1-par.alpha)*HM**((par.sigma-1)/par.sigma) + par.alpha*HF**((par.sigma-1)/par.sigma))**(par.sigma/(par.sigma-1))
 
         # c. total consumption utility
         Q = C**par.omega*H**(1-par.omega)
@@ -65,6 +70,7 @@ class HouseholdSpecializationModelClass:
         TM = LM+HM
         TF = LF+HF
         disutility = par.nu*(TM**epsilon_/epsilon_+TF**epsilon_/epsilon_)
+    
         
         return utility - disutility
 
@@ -108,8 +114,30 @@ class HouseholdSpecializationModelClass:
 
     def solve(self,do_print=False):
         """ solve model continously """
+        opt = SimpleNamespace()
+        par = self.par
+        sol = self.sol
 
-        pass    
+        #x is LM, HM, LF, HF
+        def obj(x):
+            return -self.calc_utility(*x)
+
+        bounds = optimize.Bounds([0,0,0,0], [24,24,24,24])
+        constraints = optimize.LinearConstraint([[1,1,0,0], [0,0,1,1]], [0,0], [24,24])
+
+        res = optimize.minimize(obj, (8,8,8,8), method='trust-constr', bounds=bounds, constraints=constraints)
+ 
+        opt.LM = res.x[0]
+        opt.HM = res.x[1]
+        opt.LF = res.x[2]
+        opt.HF = res.x[3]
+
+        # e. print
+        if do_print:
+            for k,v in opt.__dict__.items():
+                print(f'{k} = {v:6.4f}')   
+
+        return opt 
 
     def solve_wF_vec(self,discrete=False):
         """ solve model for vector of female wages """
