@@ -43,6 +43,7 @@ class HouseholdSpecializationModelClass:
         sol.beta0 = np.nan
         sol.beta1 = np.nan
 
+
     def calc_utility(self,LM,HM,LF,HF):
         """ calculate utility """
 
@@ -60,6 +61,7 @@ class HouseholdSpecializationModelClass:
             H = min(HM, HF)
         else:
             H = ((1-par.alpha)*HM**((par.sigma-1)/par.sigma) + par.alpha*HF**((par.sigma-1)/par.sigma))**(par.sigma/(par.sigma-1))
+
         # c. total consumption utility
         Q = C**par.omega*H**(1-par.omega)
         utility = np.fmax(Q,1e-8)**(1-par.rho)/(1-par.rho)
@@ -71,6 +73,7 @@ class HouseholdSpecializationModelClass:
         disutility = par.nu*(TM**epsilon_/epsilon_+TF**epsilon_/epsilon_)
         
         return utility - disutility
+
 
     def solve_discrete(self,do_print=False):
         """ solve model discretely """
@@ -110,6 +113,7 @@ class HouseholdSpecializationModelClass:
 
         return opt
 
+
     def solve(self,do_print=False):
         """ solve model continously """
 
@@ -147,18 +151,21 @@ class HouseholdSpecializationModelClass:
         """ solve model for vector of female wages """
         par = self.par
         sol = self.sol
-    
+
+        # iterate over values for female wage
         for i,wF in enumerate(par.wF_vec):
             par.wF = wF
-            if discrete:
-                opt = self.solve_discrete()
-            else:
-                opt = self.solve()
+
+            # solve discretely or not as requested
+            if discrete: opt = self.solve_discrete()
+            else: opt = self.solve()
+
+            # store solution data in an array for each iteration
             sol.LM_vec[i] = opt.LM
             sol.HM_vec[i] = opt.HM
             sol.LF_vec[i] = opt.LF
             sol.HF_vec[i] = opt.HF
-        pass
+
 
     def run_regression(self):
         """ run regression """
