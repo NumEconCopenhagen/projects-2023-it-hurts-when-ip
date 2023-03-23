@@ -53,6 +53,7 @@ class HouseholdSpecializationModelClass:
         C = par.wM*LM + par.wF*LF
 
         # b. home production
+        #implementation  of the additional situations of when sigma!=1.0 using "if" argument structure
         if par.sigma == 1.0:
             H = HM**(1-par.alpha)*HF**par.alpha
         elif par.sigma == 0:
