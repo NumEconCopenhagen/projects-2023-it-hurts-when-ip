@@ -112,28 +112,33 @@ class HouseholdSpecializationModelClass:
 
     def solve(self,do_print=False):
         """ solve model continously """
+
+        # get namespaces
         opt = SimpleNamespace()
         par = self.par
         sol = self.sol
 
-        #x is LM, HM, LF, HF
-        def obj(x):
-            return -self.calc_utility(*x)
+        # define objective function to maximise utility
+        def obj(x):  
+            return -self.calc_utility(*x) # x is LM, HM, LF, HF
 
+        # set bounds 0 <= LM, HM, LF, HF <= 24
+        # set constraints: 0 <= LM+HM <= 24 and 0 <= LF+HF <= 24
         bounds = optimize.Bounds([0,0,0,0], [24,24,24,24])
         constraints = optimize.LinearConstraint([[1,1,0,0], [0,0,1,1]], [0,0], [24,24])
 
+        # call optimiser
         res = optimize.minimize(obj, (8,8,8,8), method='trust-constr', bounds=bounds, constraints=constraints)
- 
+
+        # store solution in opt dictionary
         opt.LM = res.x[0]
         opt.HM = res.x[1]
         opt.LF = res.x[2]
         opt.HF = res.x[3]
 
-        # e. print
-        if do_print:
-            for k,v in opt.__dict__.items():
-                print(f'{k} = {v:6.4f}')   
+        # print
+        if do_print: 
+            for k,v in opt.__dict__.items(): print(f'{k} = {v:6.4f}')   
 
         return opt 
     
