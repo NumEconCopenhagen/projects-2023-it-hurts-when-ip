@@ -25,6 +25,10 @@ class HouseholdSpecializationModelClass:
         par.alpha = 0.5
         par.sigma = 1.0
 
+        # d. preferences
+        par.pref_HF = 0
+        par.pref_HM = 0
+
         # d. wages
         par.wM = 1.0
         par.wF = 1.0
@@ -72,7 +76,10 @@ class HouseholdSpecializationModelClass:
         TF = LF+HF
         disutility = par.nu*(TM**epsilon_/epsilon_+TF**epsilon_/epsilon_)
         
-        return utility - disutility
+        HF_util = HF * par.pref_HF
+        HM_util = HM * par.pref_HM
+
+        return utility - disutility + HF_util + HM_util
 
 
     def solve_discrete(self,do_print=False):
