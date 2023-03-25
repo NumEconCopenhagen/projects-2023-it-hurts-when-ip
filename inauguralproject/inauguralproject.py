@@ -25,20 +25,21 @@ class HouseholdSpecializationModelClass:
         par.alpha = 0.5
         par.sigma = 1.0
 
-        # d. preferences
-        par.pref_HF = 0
-        par.pref_HM = 0
+        # d. additional disutility of household labor
+        par.nu_2 = 0.0
+        par.eps_HM = 1.0
+        par.eps_HF = 1.0
 
-        # d. wages
+        # e. wages
         par.wM = 1.0
         par.wF = 1.0
         par.wF_vec = np.linspace(0.8,1.2,5)
 
-        # e. targets
+        # f. targets
         par.beta0_target = 0.4
         par.beta1_target = -0.1
 
-        # f. solution
+        # g. solution
         sol.LM_vec = np.zeros(par.wF_vec.size)
         sol.HM_vec = np.zeros(par.wF_vec.size)
         sol.LF_vec = np.zeros(par.wF_vec.size)
@@ -76,10 +77,12 @@ class HouseholdSpecializationModelClass:
         TF = LF+HF
         disutility = par.nu*(TM**epsilon_/epsilon_+TF**epsilon_/epsilon_)
         
-        HF_util = HF * par.pref_HF
-        HM_util = HM * par.pref_HM
-
-        return utility - disutility + HF_util + HM_util
+        # e. additional disutility of household labor
+        eps_HM_ = 1 + 1/par.eps_HM
+        eps_HF_ = 1 + 1/par.eps_HF
+        additional_disutility = par.nu_2 * (HM**eps_HM_/eps_HM_ + HF**eps_HF_/eps_HF_)
+        
+        return utility - disutility - additional_disutility
 
 
     def solve_discrete(self,do_print=False):
