@@ -26,9 +26,9 @@ class HouseholdSpecializationModelClass:
         par.sigma = 1.0
 
         # d. additional disutility of household labor
-        par.nu_2 = 0.0
-        par.eps_HM = 1.0
-        par.eps_HF = 1.0
+        par.include_additional_disutil = False
+        par.disutil_HM = 1
+        par.disutil_HF = 1
 
         # e. wages
         par.wM = 1.0
@@ -78,9 +78,7 @@ class HouseholdSpecializationModelClass:
         disutility = par.nu*(TM**epsilon_/epsilon_+TF**epsilon_/epsilon_)
         
         # e. additional disutility of household labor
-        eps_HM_ = 1 + 1/par.eps_HM
-        eps_HF_ = 1 + 1/par.eps_HF
-        additional_disutility = par.nu_2 * (HM**eps_HM_/eps_HM_ + HF**eps_HF_/eps_HF_)
+        additional_disutility = par.include_additional_disutil * (par.disutil_HM * HM**epsilon_/epsilon_ + par.disutil_HF * HF**epsilon_/epsilon_)
         
         return utility - disutility - additional_disutility
 
@@ -192,4 +190,3 @@ class HouseholdSpecializationModelClass:
         """ estimate alpha and sigma """
 
         pass
-
