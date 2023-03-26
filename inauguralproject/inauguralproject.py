@@ -1,10 +1,7 @@
 from types import SimpleNamespace
-
 import numpy as np
 from scipy import optimize
 
-import pandas as pd 
-import matplotlib.pyplot as plt
 
 class HouseholdSpecializationModelClass:
 
@@ -185,8 +182,3 @@ class HouseholdSpecializationModelClass:
         y = np.log(sol.HF_vec/sol.HM_vec)
         A = np.vstack([np.ones(x.size),x]).T
         sol.beta0,sol.beta1 = np.linalg.lstsq(A,y,rcond=None)[0]
-    
-    def estimate(self,alpha=None,sigma=None):
-        """ estimate alpha and sigma """
-
-        pass
