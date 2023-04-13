@@ -1,0 +1,16 @@
+						ETS Information	Entities
+2021	2. Verified emissions	EU27 + UK	10 Aviation	t CO2-eq	Large (emissions > 500 kt CO2-eq)	16 153 519,000	12
+2021	2. Verified emissions	EU27 + UK	10 Aviation	t CO2-eq	Medium (50 < emissions < 500 kt CO2-eq)	9 200 219,000	49
+2021	2. Verified emissions	EU27 + UK	10 Aviation	t CO2-eq	Mini (0 < emissions < 25 kt CO2-eq)	 887 632,000	219
+2021	2. Verified emissions	EU27 + UK	10 Aviation	t CO2-eq	Small (25 < emissions < 50 kt CO2-eq)	 692 917,000	19
+2021	2. Verified emissions	EU27 + UK	10 Aviation	t CO2-eq	Zero (emissions = 0 kt CO2-eq)	0	6
+2021	2. Verified emissions	EU27 + UK	20 Combustion of fuels	t CO2-eq	Large (emissions > 500 kt CO2-eq)	628 716 707,000	331
+2021	2. Verified emissions	EU27 + UK	20 Combustion of fuels	t CO2-eq	Medium (50 < emissions < 500 kt CO2-eq)	126 929 572,000	849
+2021	2. Verified emissions	EU27 + UK	20 Combustion of fuels	t CO2-eq	Mini (0 < emissions < 25 kt CO2-eq)	22 369 379,000	3.167
+2021	2. Verified emissions	EU27 + UK	20 Combustion of fuels	t CO2-eq	Small (25 < emissions < 50 kt CO2-eq)	23 656 961,000	678
+2021	2. Verified emissions	EU27 + UK	20 Combustion of fuels	t CO2-eq	Zero (emissions = 0 kt CO2-eq)	0	301
+2021	2. Verified emissions	EU27 + UK	20-99 All stationary installations	t CO2-eq	Large (emissions > 500 kt CO2-eq)	964 731 165,000	567
+2021	2. Verified emissions	EU27 + UK	20-99 All stationary installations	t CO2-eq	Medium (50 < emissions < 500 kt CO2-eq)	265 192 214,000	1.775
+2021	2. Verified emissions	EU27 + UK	20-99 All stationary installations	t CO2-eq	Mini (0 < emissions < 25 kt CO2-eq)	36 694 996,000	4.571
+2021	2. Verified emissions	EU27 + UK	20-99 All stationary installations	t CO2-eq	Small (25 < emissions < 50 kt CO2-eq)	44 031 418,000	1.248
+2021	2. Verified emissions	EU27 + UK	20-99 All stationary installations	t CO2-eq	Zero (emissions = 0 kt CO2-eq)	0	419
