@@ -8,7 +8,7 @@ import re
 
 def clean(ets):
     """ cleaning of the original datset ets""" 
-    
+
     ets.rename(columns={'ETS information':'category', 'main activity sector name':'sector'}, inplace=True)
    
     # establish list of rows to drop and handler function
@@ -51,3 +51,7 @@ def clean(ets):
     ets['year'] = ets['year'].astype('int')
     return ets
 
+
+
+def group(ets):
+    """ grouping of the datset ets"""
