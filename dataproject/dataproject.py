@@ -7,7 +7,8 @@ import re
 
 
 def clean(ets):
-    """ Example function. Keep only the subset regs of regions in data.""" 
+    """ cleaning of the original datset ets""" 
+    
     ets.rename(columns={'ETS information':'category', 'main activity sector name':'sector'}, inplace=True)
    
     # establish list of rows to drop and handler function
