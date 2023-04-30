@@ -1,8 +1,0 @@
-	2021	2021	2021
-	EU27 + UK	EU27 + UK	EU27 + UK
-Size	10 Aviation	20 Combustion of fuels	20-99 All stationary installations
-Large (emissions > 500 kt CO2-eq)	0,0393	0,0621	0,0661
-Medium (50 < emissions < 500 kt CO2-eq)	0,1607	0,1594	0,2069
-Small (25 < emissions < 50 kt CO2-eq)	0,0623	0,1273	0,1455
-Mini (0 < emissions < 25 kt CO2-eq)	0,718	0,5946	0,5328
-Zero (emissions = 0 kt CO2-eq)	0,0197	0,0565	0,0488
