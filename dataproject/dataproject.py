@@ -68,6 +68,7 @@ def sort_legend(ax, key=lambda label: label, reverse=False, **kw):
 
 
 def stretch_series(series, pow=1, span=1, lb=0):
+    series = series.copy()
     series **= pow
     series *= span / (max(series)-min(series))
     series += lb - min(series)
