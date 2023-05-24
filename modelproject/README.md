@@ -1,6 +1,6 @@
 # Model analysis project
 
-Our project is titled **PROJECT TITLE** and is about EXPLAIN.
+Our project is titled **Concert Model** and is about analyzing the problem of maximizing profits faced by concert producers.
 
 The **results** of the project can be seen from running [modelproject.ipynb](modelproject.ipynb).
 
