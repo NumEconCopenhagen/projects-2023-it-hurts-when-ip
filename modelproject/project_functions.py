@@ -1,6 +1,7 @@
 import numpy as np
 from matplotlib import pyplot as plt
 from matplotlib import cm
+from scipy import optimize
 
 # Function to plot a 3D graph
 def plot3D(func, xs, ys, *args, ax=None):
@@ -24,16 +25,45 @@ def popularity(performances):
 
 # Function to calculate demand based on ticket price and performances per year
 def demand(price, performances):
-    return 20 * (50 - price) * popularity(performances)
+    return 20 * (35 - price) * popularity(performances)
 
 # Function to calculate revenue based on ticket price, performances per year, and number of seats
 def revenue(price, performances, seats=np.inf):
     return price * np.minimum(seats, demand(price, performances)) # quantity sold is capped at number of seats
 
-# Function to calculate venue cost based on number of seats
-def venue_cost(seats):
-    seats = np.maximum(0, seats)
-    return 5 * seats ** 0.95
+# Function to estimate venue cost coeffecients based on number of seats
+def estimate_venue_cost_fn(venues):
+
+    # Function to create venue cost functions with different coefficients
+    def create_venue_cost_fn(a, b, c):
+        def venue_cost(seats):
+            return a * seats**b + c
+        return venue_cost
+    
+    # Function to calculate moment-by-moment difference for some venue cost function
+    def moment_diff(venue_cost):
+        return [venue['cost'] - venue_cost(venue['seats']) for venue in venues] 
+    
+    # Function to calculate the weighted error for some venue cost function
+    def weighted_error(a, b, c, W=None):
+        if W==None: W=np.eye(len(venues))
+        venue_cost = create_venue_cost_fn(a, b, c)
+        diff = np.array(moment_diff(venue_cost))
+        return diff @ W @ diff 
+    
+    # Objective function to minimize difference between data and venue cost function
+    def obj(x):
+        return weighted_error(x[0], x[1], x[2])
+    
+    # Perform minimization
+    res = optimize.minimize(obj, (1,1,1), method='Nelder-Mead', bounds=[(0, 50), (0, 2), (-100, 100)], options={'maxfev':1e6})
+    print('Difference with data minimized with:\n', f'a = {res.x[0]:5.3f}, b = {res.x[1]:5.3f}, c = {res.x[2]:5.3f}')
+
+    # Overwrite undefined venue cost function
+    global venue_cost
+    venue_cost = create_venue_cost_fn(res.x[0],res.x[1],res.x[2])
+
+    return venue_cost
 
 # Function to calculate profit when venue size exactly matches demand
 def profit(price, performances):
