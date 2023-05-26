@@ -1,0 +1,36 @@
+{
+	"folders": [
+		{
+			"path": "../../../../../../../IntroProg-exercises-2023"
+		},
+		{
+			"name": "projects-2023-it-hurts-when-ip",
+			"path": "../../projects-2023-it-hurts-when-ip"
+		},
+		{
+			"name": "IntroProg-lectures",
+			"path": "../../IntroProg-lectures"
+		},
+		{
+			"name": "IntroProg-lectures-1",
+			"path": "../../IntroProg-lectures-1"
+		},
+		{
+			"name": "IntroProg-exercises-1",
+			"path": "../../IntroProg-exercises-1"
+		},
+		{
+			"name": "projects-2023-it-hurts-when-ip-1",
+			"path": "../../projects-2023-it-hurts-when-ip-1"
+		},
+		{
+			"name": "projects-2023-it-hurts-when-ip-2",
+			"path": "../../projects-2023-it-hurts-when-ip-2"
+		},
+		{
+			"name": "projects-2023-it-hurts-when-ip-3",
+			"path": ".."
+		}
+	],
+	"settings": {}
+}
